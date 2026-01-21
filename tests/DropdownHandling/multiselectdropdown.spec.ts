@@ -5,11 +5,11 @@ test("Verify single select dropdown",async ({page})=>{
     await page.goto("https://testautomationpractice.blogspot.com/");
 
     // 1) Select option from the drop down -- 4ways
-   /* await page.locator('#colors').selectOption(['Red','Blue','Green']); // By visible text
+    await page.locator('#colors').selectOption(['Red','Blue','Green']); // By visible text
     await page.locator('#colors').selectOption(['red','green','white']); // By using value
     await page.locator('#colors').selectOption([{label: 'Red'}, {label: 'Blue'}, {label: 'Green'}]); // By using label
     await page.locator('#colors').selectOption([{index: 0}, {index: 2}, {index: 4}]);
-*/
+
     await page.waitForTimeout(5000)
 
     //2. check number of dropdowns
