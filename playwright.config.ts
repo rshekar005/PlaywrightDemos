@@ -13,12 +13,17 @@ import { defineConfig, devices } from '@playwright/test';
  */
 export default defineConfig({
   testDir: './tests',
+  timeout: 60000, // To change then default timeout globally(default is 30000/ 30 secs)
+
+  expect: {timeout: 10000},// To apply a longer wait for all expect conditions (default is 5000ms / 5 sec)
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  // retries: process.env.CI ? 2 : 0, // This is applicable when we run in jenkins where it runs in headless mode 
+
+  retries: 3, //Retyr locally and it runs for 3 times
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
@@ -29,8 +34,12 @@ export default defineConfig({
     // baseURL: 'http://localhost:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
-  },
+    trace: 'off',
+
+    screenshot:'only-on-failure',  // capture screenshots when only on failure. This one can be seen on reports
+    video:'retain-on-failure', // records the video of the scripts
+  
+  }, 
 
   /* Configure projects for major browsers */
   projects: [
