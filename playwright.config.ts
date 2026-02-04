@@ -14,7 +14,8 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './tests',
   timeout: 30000, // To change then default timeout globally(default is 30000/ 30 secs)
-
+  grep: /@sanity/,
+  grepInvert:/@regression/,
   expect: {timeout: 10000},// To apply a longer wait for all expect conditions (default is 5000ms / 5 sec)
   /* Run tests in files in parallel */
   fullyParallel: false,
@@ -35,7 +36,7 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'off',
-
+    
     screenshot:'only-on-failure',  // capture screenshots when only on failure. This one can be seen on reports
     video:'retain-on-failure', // records the video of the scripts when failures
   
