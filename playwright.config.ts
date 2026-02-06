@@ -14,11 +14,11 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './tests',
   timeout: 30000, // To change then default timeout globally(default is 30000/ 30 secs)
-  grep: /@sanity/,
-  grepInvert:/@regression/,
+  // grep: /@sanity/,
+  // grepInvert:/@regression/,
   expect: {timeout: 10000},// To apply a longer wait for all expect conditions (default is 5000ms / 5 sec)
   /* Run tests in files in parallel */
-  fullyParallel: false,
+ fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
@@ -26,7 +26,8 @@ export default defineConfig({
 
   //retries: 3, //Retyr locally and it runs for 3 times
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  //workers: process.env.CI ? 1 : undefined,
+  workers:3,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
@@ -47,14 +48,15 @@ export default defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
+      // fullyParallel: true  --> We can run tests in parallel in specific browser also
     },
 
-  /*  {
+  /* {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
     },
 
-    {
+     {
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
     },
