@@ -18,7 +18,7 @@ export default defineConfig({
   // grepInvert:/@regression/,
   expect: {timeout: 10000},// To apply a longer wait for all expect conditions (default is 5000ms / 5 sec)
   /* Run tests in files in parallel */
- fullyParallel: true,
+ fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
