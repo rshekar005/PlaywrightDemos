@@ -18,7 +18,7 @@ export default defineConfig({
   // grepInvert:/@regression/,
   expect: {timeout: 10000},// To apply a longer wait for all expect conditions (default is 5000ms / 5 sec)
   /* Run tests in files in parallel */
- fullyParallel: false,
+ fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
@@ -29,14 +29,26 @@ export default defineConfig({
   //workers: process.env.CI ? 1 : undefined,
   workers:3,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+ // reporter: 'html',  // Default location is playwright-results folder in project(index.html)
+
+ reporter:[
+           ['html', {open: 'always', outputFolder:'html-report'}],// Report will open always irrespctive of failure or pass and folder path for report
+           // ['list'],
+           // ['json'],
+           // ['line'],
+          // ['dot'],
+          // ['junit', {outputFile:'results.xml'}],
+          //  ['json', {outputFile:'results.json'}],
+           ['allure-playwright'] // Generate allure report
+          ],  
+ 
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'off',
+    trace: 'retain-on-failure',
     
     screenshot:'only-on-failure',  // capture screenshots when only on failure. This one can be seen on reports
     video:'retain-on-failure', // records the video of the scripts when failures

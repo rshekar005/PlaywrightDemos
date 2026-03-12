@@ -9,9 +9,11 @@
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.57.0",
-    "@types/node": "^25.0.1"
+    "@types/node": "^25.0.1",
+    "allure-playwright": "^3.5.0"
   },
   "dependencies": {
+    "@axe-core/playwright": "^4.11.1",
     "csv-parse": "^6.1.0",
     "date-fns": "^4.1.0",
     "exceljs": "^4.4.0",
